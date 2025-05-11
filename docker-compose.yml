@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  emqx:
+    image: emqx/emqx:latest
+    container_name: emqx-ce-dev
+    ports:
+      - "1883:1883"
+      - "8083:8083"
+      - "8084:8084"
+      - "8883:8883"
+      - "18083:18083"
+    volumes:
+      - emqx-data:/opt/emqx/data
+      - emqx-log:/opt/emqx/log
+      - emqx-etc:/opt/emqx/etc
+    environment:
+      - EMQX_NAME=emqx
+      - EMQX_DASHBOARD__DEFAULT_USER__PASSWORD=public
+    restart: always
+
+volumes:
+  emqx-data:
+  emqx-log:
+  emqx-etc:
