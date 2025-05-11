@@ -1,4 +1,4 @@
-import { Column, Entity, Index, ObjectIdColumn, Point } from 'typeorm';
+import { Column, Entity, Index, ObjectIdColumn } from 'typeorm';
 
 import { ObjectId } from 'mongodb';
 
