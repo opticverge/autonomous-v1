@@ -18,7 +18,20 @@ services:
       - EMQX_DASHBOARD__DEFAULT_USER__PASSWORD=public
     restart: always
 
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb-dev
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    restart: always
+
 volumes:
   emqx-data:
   emqx-log:
   emqx-etc:
+  mongodb-data:
