@@ -21,8 +21,9 @@ export class MqttService implements OnModuleInit, OnModuleDestroy {
       await this.client.close();
       this.logger.log('Successfully closed connection to MQTT broker');
     } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
       this.logger.error(
-        `Failed to close connection to MQTT broker: ${error.message}`,
+        `Failed to close connection to MQTT broker: ${message}`,
       );
       throw error;
     }
@@ -33,7 +34,8 @@ export class MqttService implements OnModuleInit, OnModuleDestroy {
       await this.client.connect();
       this.logger.log('Successfully connected to MQTT broker');
     } catch (error) {
-      this.logger.error(`Failed to connect to MQTT broker: ${error.message}`);
+      const message = error instanceof Error ? error.message : String(error);
+      this.logger.error(`Failed to connect to MQTT broker: ${message}`);
       throw error;
     }
   }

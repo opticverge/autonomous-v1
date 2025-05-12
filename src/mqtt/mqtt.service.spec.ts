@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MqttService } from './mqtt.service';
 import { MQTT_SERVICE_NAME } from './constants/mqtt.constants';
-import { ClientProxy } from '@nestjs/microservices';
 
 describe('MqttService', () => {
   let service: MqttService;
