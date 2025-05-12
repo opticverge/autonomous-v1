@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { MQTT_SERVICE_NAME } from '@autonomous/mqtt/constants/mqtt.constants';
+import { randomUUID } from 'crypto';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { MQTT_SERVICE_NAME } from '@autonomous/mqtt/constants/mqtt.constants';
             username: configService.getOrThrow<string>('MQTT_USERNAME'),
             password: configService.getOrThrow<string>('MQTT_PASSWORD'),
             protocol: 'mqtt',
+            clientId: `autonomous-backend-client-${randomUUID()}`,
           },
         }),
       },

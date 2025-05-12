@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from '@autonomous/app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
+import { randomUUID } from 'crypto';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,6 +14,7 @@ async function bootstrap() {
       url: configService.getOrThrow<string>('MQTT_URL'),
       username: configService.getOrThrow<string>('MQTT_USERNAME'),
       password: configService.getOrThrow<string>('MQTT_PASSWORD'),
+      clientId: `autonomous-backend-listener-${randomUUID()}`,
       subscribeOptions: {
         qos: 1,
       },
