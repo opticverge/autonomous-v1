@@ -5,7 +5,7 @@ import {
   OnModuleDestroy,
   OnModuleInit,
 } from '@nestjs/common';
-import { MQTT_SERVICE_NAME } from '@autonomous/mqtt/constants/mqtt.constants';
+import { MQTT_SERVICE_NAME } from '@autonomous/mqtt/mqtt.constants';
 import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()

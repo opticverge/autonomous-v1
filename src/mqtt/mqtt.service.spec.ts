@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { MqttService } from './mqtt.service';
-import { MQTT_SERVICE_NAME } from './constants/mqtt.constants';
+import { MqttService } from '@autonomous/mqtt/mqtt.service';
+import { MQTT_SERVICE_NAME } from '@autonomous/mqtt/mqtt.constants';
 
 describe('MqttService', () => {
   let service: MqttService;

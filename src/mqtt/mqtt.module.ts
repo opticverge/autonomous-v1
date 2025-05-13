@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { MQTT_SERVICE_NAME } from '@autonomous/mqtt/constants/mqtt.constants';
+import { MQTT_SERVICE_NAME } from '@autonomous/mqtt/mqtt.constants';
 import { randomUUID } from 'crypto';
 import { MqttService } from '@autonomous/mqtt/mqtt.service';
 
