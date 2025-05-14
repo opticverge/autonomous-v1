@@ -4,9 +4,13 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { MQTT_SERVICE_NAME } from '@autonomous/mqtt/mqtt.constants';
 import { randomUUID } from 'crypto';
 import { MqttService } from '@autonomous/mqtt/mqtt.service';
+import { MqttController } from '@autonomous/mqtt/mqtt.controller';
+import { TelemetryService } from '@autonomous/mqtt/services';
+import { DatabaseModule } from '@autonomous/database/database.module';
 
 @Module({
   imports: [
+    DatabaseModule,
     ClientsModule.registerAsync([
       {
         name: MQTT_SERVICE_NAME,
@@ -24,6 +28,7 @@ import { MqttService } from '@autonomous/mqtt/mqtt.service';
       },
     ]),
   ],
-  providers: [MqttService],
+  providers: [MqttService, TelemetryService],
+  controllers: [MqttController],
 })
 export class MqttModule {}
