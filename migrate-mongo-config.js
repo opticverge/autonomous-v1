@@ -2,7 +2,7 @@ require('dotenv').config();
 
 module.exports = {
   mongodb: {
-    url: `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_DOMAIN}:${process.env.MONGO_PORT}`,
+    url: `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`,
   },
   migrationsDir: 'migrations',
   changelogCollectionName: 'changelog',
