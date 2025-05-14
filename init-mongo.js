@@ -1,0 +1,15 @@
+conn = new Mongo();
+db = conn.getDB(process.env.MONGO_INITDB_DATABASE);
+
+db.createUser({
+  user: process.env.MONGO_APP_USERNAME,
+  pwd: process.env.MONGO_APP_PASSWORD,
+  roles: [
+    {
+      role: "readWrite",
+      db: process.env.MONGO_INITDB_DATABASE,
+    }
+  ]
+});
+
+db.vehicles.insertOne({vehicleId: process.env.VEHICLE_ID, vehicleName: process.env.VEHICLE_NAME});
