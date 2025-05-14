@@ -15,6 +15,7 @@ async function bootstrap() {
       username: configService.getOrThrow<string>('MQTT_USERNAME'),
       password: configService.getOrThrow<string>('MQTT_PASSWORD'),
       clientId: `autonomous-backend-listener-${randomUUID()}`,
+      protocolVersion: 5,
       subscribeOptions: {
         qos: 1,
       },
