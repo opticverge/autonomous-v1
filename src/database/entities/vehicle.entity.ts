@@ -5,8 +5,11 @@ import {
   ObjectIdColumn,
   UpdateDateColumn,
   Index,
+  BeforeInsert,
 } from 'typeorm';
 import { ObjectId } from 'mongodb';
+
+import { v4 as uuidv4 } from 'uuid';
 
 @Entity('vehicles')
 export class Vehicle {
@@ -20,9 +23,17 @@ export class Vehicle {
   @Column({ nullable: true })
   name: string;
 
+  @Column({ nullable: true })
+  status: string;
+
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn({ nullable: true })
   updatedAt: Date;
+
+  @BeforeInsert()
+  generateVehicleId() {
+    this.vehicleId = uuidv4();
+  }
 }
