@@ -12,7 +12,7 @@ export class Telemetry {
   vehicleId: string;
 
   @Column()
-  timeStamp: Date;
+  timestamp: Date;
 
   @Column()
   location: {
