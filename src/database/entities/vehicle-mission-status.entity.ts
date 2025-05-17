@@ -8,7 +8,6 @@ import {
 import { ObjectId } from 'mongodb';
 import { MissionStatus } from './mission-status.enum';
 
-
 @Entity('vehicle_mission_status')
 export class VehicleMissionStatusEntity {
   @ObjectIdColumn()
