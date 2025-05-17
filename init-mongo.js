@@ -13,3 +13,5 @@ db.createUser({
 });
 
 db.vehicles.insertOne({vehicleId: process.env.VEHICLE_ID, vehicleName: process.env.VEHICLE_NAME});
+
+db.missions.insertOne({missionId: process.env.MISSION_ID, name: process.env.MISSION_NAME});

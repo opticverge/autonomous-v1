@@ -35,6 +35,8 @@ services:
       - MONGO_APP_PASSWORD=${MONGO_APP_PASSWORD}
       - VEHICLE_ID=${VEHICLE_ID}
       - VEHICLE_NAME=${VEHICLE_NAME}
+      - MISSION_ID=${MISSION_ID}
+      - MISSION_NAME=${MISSION_NAME}
     restart: always
     networks:
       - autonomous
