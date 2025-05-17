@@ -4,8 +4,17 @@ import { ConfigService } from '@nestjs/config';
 import {
   VehicleRepository,
   TelemetryRepository,
+  MissionRepository,
+  VehicleMissionRepository,
+  VehicleMissionStatusRepository,
 } from '@autonomous/database/repositories';
-import { Telemetry, Vehicle } from '@autonomous/database/entities';
+import {
+  MissionEntity,
+  TelemetryEntity,
+  VehicleEntity,
+  VehicleMissionEntity,
+  VehicleMissionStatusEntity,
+} from '@autonomous/database/entities';
 
 @Module({
   imports: [
@@ -23,9 +32,27 @@ import { Telemetry, Vehicle } from '@autonomous/database/entities';
         logging: true,
       }),
     }),
-    TypeOrmModule.forFeature([Vehicle, Telemetry]),
+    TypeOrmModule.forFeature([
+      VehicleEntity,
+      TelemetryEntity,
+      MissionEntity,
+      VehicleMissionEntity,
+      VehicleMissionStatusEntity,
+    ]),
   ],
-  providers: [VehicleRepository, TelemetryRepository],
-  exports: [VehicleRepository, TelemetryRepository],
+  providers: [
+    VehicleRepository,
+    TelemetryRepository,
+    MissionRepository,
+    VehicleMissionRepository,
+    VehicleMissionStatusRepository,
+  ],
+  exports: [
+    VehicleRepository,
+    TelemetryRepository,
+    MissionRepository,
+    VehicleMissionRepository,
+    VehicleMissionStatusRepository,
+  ],
 })
 export class DatabaseModule {}
