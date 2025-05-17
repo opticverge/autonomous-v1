@@ -1,22 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { Telemetry } from '@autonomous/database/entities';
-import { VehicleTelemetry } from '@autonomous/mqtt/types';
-import { Repository } from 'typeorm';
+import { TelemetryEntity } from '@autonomous/database/entities';
+import { VehicleTelemetry } from '@autonomous/shared/types';
+import { MongoRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class TelemetryRepository {
   constructor(
-    @InjectRepository(Telemetry)
-    private readonly repository: Repository<Telemetry>,
+    @InjectRepository(TelemetryEntity)
+    private readonly repository: MongoRepository<TelemetryEntity>,
   ) {}
 
-  async create(telemetry: VehicleTelemetry): Promise<Telemetry> {
-    const entity = new Telemetry();
-    entity.vehicleId = telemetry.vehicleId;
-    entity.timestamp = telemetry.timestamp;
-    entity.location = telemetry.location;
-
+  async create(data: VehicleTelemetry): Promise<TelemetryEntity> {
+    const entity = this.repository.create(data);
     return await this.repository.save(entity);
   }
 }
