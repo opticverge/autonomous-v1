@@ -8,14 +8,14 @@ import {
 import { ClientProxy } from '@nestjs/microservices';
 import { AppEventTopic, EventPayload } from '@autonomous/shared/types';
 import { firstValueFrom } from 'rxjs';
-import { MQTT_EVENT_BUS_NAME } from '@autonomous/messaging/messaging.constants';
+import { MQTT_PUBLISHER_NAME } from '@autonomous/messaging/messaging.constants';
 
 @Injectable()
-export class MqttEventBusService implements OnModuleInit, OnModuleDestroy {
-  private readonly logger = new Logger(MqttEventBusService.name);
+export class MqttPublisherService implements OnModuleInit, OnModuleDestroy {
+  private readonly logger = new Logger(MqttPublisherService.name);
 
   constructor(
-    @Inject(MQTT_EVENT_BUS_NAME) private readonly client: ClientProxy,
+    @Inject(MQTT_PUBLISHER_NAME) private readonly client: ClientProxy,
   ) {}
 
   async publish<T extends AppEventTopic>(topic: T, payload: EventPayload<T>) {

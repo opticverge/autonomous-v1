@@ -1,1 +1,1 @@
-export { MqttEventBusService } from './mqtt-event-bus.service';
+export { MqttPublisherService } from './mqtt-publisher.service';

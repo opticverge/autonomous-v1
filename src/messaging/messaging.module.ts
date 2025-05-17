@@ -2,14 +2,14 @@ import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
 import { randomUUID } from 'crypto';
-import { MqttEventBusService } from './mqtt-event-bus.service';
-import { MQTT_EVENT_BUS_NAME } from '@autonomous/messaging/messaging.constants';
+import { MqttPublisherService } from './mqtt-publisher.service';
+import { MQTT_PUBLISHER_NAME } from '@autonomous/messaging/messaging.constants';
 
 @Module({
   imports: [
     ClientsModule.registerAsync([
       {
-        name: MQTT_EVENT_BUS_NAME,
+        name: MQTT_PUBLISHER_NAME,
         inject: [ConfigService],
         useFactory: (configService: ConfigService) => ({
           transport: Transport.MQTT,
@@ -24,7 +24,7 @@ import { MQTT_EVENT_BUS_NAME } from '@autonomous/messaging/messaging.constants';
       },
     ]),
   ],
-  providers: [MqttEventBusService],
-  exports: [MqttEventBusService],
+  providers: [MqttPublisherService],
+  exports: [MqttPublisherService],
 })
 export class MessagingModule {}

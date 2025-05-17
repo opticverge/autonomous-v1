@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { MqttEventBusService } from './mqtt-event-bus.service';
+import { MqttPublisherService } from './mqtt-publisher.service';
 
 describe('MqttEventBusService', () => {
-  let service: MqttEventBusService;
+  let service: MqttPublisherService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [MqttEventBusService],
+      providers: [MqttPublisherService],
     }).compile();
 
-    service = module.get<MqttEventBusService>(MqttEventBusService);
+    service = module.get<MqttPublisherService>(MqttPublisherService);
   });
 
   it('should be defined', () => {
