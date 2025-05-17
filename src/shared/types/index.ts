@@ -3,8 +3,8 @@ import {
   VehicleMissionEntity,
   VehicleMissionStatusEntity,
   TelemetryEntity,
-  Location,
 } from '@autonomous/database/entities';
+import { Location } from '@autonomous/database/entities/location';
 
 export type VehicleLocation = Location;
 

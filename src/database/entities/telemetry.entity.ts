@@ -1,7 +1,7 @@
 import { BeforeInsert, Column, Entity, Index, ObjectIdColumn } from 'typeorm';
-import { Location } from '@autonomous/database/entities';
 import { ObjectId } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
+import { Location } from '@autonomous/database/entities/location';
 
 @Entity('telemetry')
 export class TelemetryEntity {

@@ -6,7 +6,8 @@ import {
   ObjectIdColumn,
 } from 'typeorm';
 import { ObjectId } from 'mongodb';
-import { MissionStatus } from '@autonomous/database/entities';
+import { MissionStatus } from './mission-status.enum';
+
 
 @Entity('vehicle_mission_status')
 export class VehicleMissionStatusEntity {
