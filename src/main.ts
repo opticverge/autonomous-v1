@@ -3,6 +3,7 @@ import { AppModule } from '@autonomous/app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
 import { randomUUID } from 'crypto';
+import { GlobalExceptionsFilter } from '@autonomous/common/filter/global-exceptions.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -21,6 +22,8 @@ async function bootstrap() {
       },
     },
   });
+
+  app.useGlobalFilters(new GlobalExceptionsFilter());
 
   await app.startAllMicroservices();
 
