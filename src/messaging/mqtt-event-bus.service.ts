@@ -8,7 +8,7 @@ import {
 import { ClientProxy } from '@nestjs/microservices';
 import { MqttEvent } from '@autonomous/shared/types';
 import { firstValueFrom } from 'rxjs';
-import { MQTT_EVENT_BUS_NAME } from '@autonomous/messaging';
+import { MQTT_EVENT_BUS_NAME } from '@autonomous/messaging/messaging.constants';
 
 @Injectable()
 export class MqttEventBusService implements OnModuleInit, OnModuleDestroy {

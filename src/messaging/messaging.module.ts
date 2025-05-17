@@ -3,7 +3,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
 import { randomUUID } from 'crypto';
 import { MqttEventBusService } from './mqtt-event-bus.service';
-import { MQTT_EVENT_BUS_NAME } from '@autonomous/messaging';
+import { MQTT_EVENT_BUS_NAME } from '@autonomous/messaging/messaging.constants';
 
 @Module({
   imports: [
