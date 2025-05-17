@@ -5,14 +5,16 @@ import {
   TelemetryEntity,
 } from '@autonomous/database/entities';
 
-export type CreateMissionRequest = Pick<
+export type CreateMission = Pick<
   MissionEntity,
   'missionId' | 'description' | 'name'
 >;
 
+export type CreateMissionRequest = CreateMission;
+
 export type CreateMissionResponse = Pick<
   MissionEntity,
-  'missionId' | 'description' | 'createdAt' | 'updatedAt'
+  'missionId' | 'name' | 'description' | 'createdAt' | 'updatedAt'
 >;
 
 export type VehicleMission = Pick<
