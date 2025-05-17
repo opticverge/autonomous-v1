@@ -4,6 +4,7 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
 import { randomUUID } from 'crypto';
 import { GlobalExceptionsFilter } from '@autonomous/common/filter/global-exceptions.filter';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -26,6 +27,14 @@ async function bootstrap() {
   app.enableVersioning();
 
   app.useGlobalFilters(new GlobalExceptionsFilter());
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
 
   await app.startAllMicroservices();
 
