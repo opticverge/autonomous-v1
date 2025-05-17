@@ -3,7 +3,7 @@ import {
   TelemetryRepository,
   VehicleRepository,
 } from '@autonomous/database/repositories';
-import { VehicleTelemetry } from '@autonomous/mqtt/types';
+import { VehicleTelemetry } from '@autonomous/shared/types';
 
 @Injectable()
 export class TelemetryService {
