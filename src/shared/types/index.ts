@@ -3,8 +3,18 @@ import {
   VehicleMissionEntity,
   VehicleMissionStatusEntity,
   TelemetryEntity,
+  VehicleEntity,
 } from '@autonomous/database/entities';
 import { Location } from '@autonomous/database/entities/location';
+
+export type Vehicle = Pick<
+  VehicleEntity,
+  'vehicleId' | 'name' | 'createdAt' | 'updatedAt'
+>;
+
+export type CreateVehicle = Pick<VehicleEntity, 'name'>;
+
+export type UpdateVehicle = CreateVehicle;
 
 export type VehicleLocation = Location;
 

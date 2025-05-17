@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { MessagingModule } from '@autonomous/messaging/messaging.module';
 import { MissionModule } from '@autonomous/mission/mission.module';
 import { VehicleMissionModule } from '@autonomous/vehicle-mission/vehicle-mission.module';
+import { VehicleModule } from '@autonomous/vehicle/vehicle.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { VehicleMissionModule } from '@autonomous/vehicle-mission/vehicle-missio
     DatabaseModule,
     MessagingModule,
     MqttModule,
+    VehicleModule,
     MissionModule,
     VehicleMissionModule,
   ],
