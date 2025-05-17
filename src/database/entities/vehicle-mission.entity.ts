@@ -1,30 +1,31 @@
 import {
-  Entity,
-  ObjectIdColumn,
+  BeforeInsert,
   Column,
   CreateDateColumn,
-  UpdateDateColumn,
+  Entity,
   Index,
-  BeforeInsert,
+  ObjectIdColumn,
+  UpdateDateColumn,
 } from 'typeorm';
-
 import { ObjectId } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
 
-@Entity('missions')
-export class MissionEntity {
+@Entity('vehicle_missions')
+export class VehicleMissionEntity {
   @ObjectIdColumn()
   _id: ObjectId;
 
   @Column()
   @Index({ unique: true })
+  vehicleMissionId: string;
+
+  @Column()
+  @Index()
+  vehicleId: string;
+
+  @Column()
+  @Index()
   missionId: string;
-
-  @Column({ nullable: true })
-  name?: string;
-
-  @Column({ nullable: true })
-  description?: string;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -34,6 +35,6 @@ export class MissionEntity {
 
   @BeforeInsert()
   generateEntityId() {
-    this.missionId = this.missionId ?? uuidv4();
+    this.vehicleMissionId = uuidv4();
   }
 }

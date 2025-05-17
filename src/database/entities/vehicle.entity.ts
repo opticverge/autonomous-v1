@@ -12,7 +12,7 @@ import { ObjectId } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
 
 @Entity('vehicles')
-export class Vehicle {
+export class VehicleEntity {
   @ObjectIdColumn()
   _id: ObjectId;
 
@@ -23,17 +23,14 @@ export class Vehicle {
   @Column({ nullable: true })
   name: string;
 
-  @Column({ nullable: true })
-  status: string;
-
   @CreateDateColumn()
   createdAt: Date;
 
-  @UpdateDateColumn({ nullable: true })
+  @UpdateDateColumn()
   updatedAt: Date;
 
   @BeforeInsert()
-  generateVehicleId() {
-    this.vehicleId = uuidv4();
+  generateEntityId() {
+    this.vehicleId = this.vehicleId ?? uuidv4();
   }
 }
