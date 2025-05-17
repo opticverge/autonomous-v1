@@ -6,7 +6,7 @@ import {
   OnModuleInit,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { MqttEvent } from '@autonomous/shared/types';
+import { AppEventTopic, EventPayload } from '@autonomous/shared/types';
 import { firstValueFrom } from 'rxjs';
 import { MQTT_EVENT_BUS_NAME } from '@autonomous/messaging/messaging.constants';
 
@@ -18,9 +18,8 @@ export class MqttEventBusService implements OnModuleInit, OnModuleDestroy {
     @Inject(MQTT_EVENT_BUS_NAME) private readonly client: ClientProxy,
   ) {}
 
-  async publish(message: MqttEvent): Promise<void> {
-    const { topic, payload } = message;
-    return firstValueFrom(this.client.emit(topic, payload));
+  async publish<T extends AppEventTopic>(topic: T, payload: EventPayload<T>) {
+    await firstValueFrom(this.client.emit(topic, payload));
   }
 
   async onModuleInit() {

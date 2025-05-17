@@ -16,12 +16,7 @@ export class VehicleMissionController {
   @Post()
   async createVehicleMission(@Body() payload: CreateVehicleMissionDto) {
     const mission = await this.vehicleMissionService.create(payload);
-
-    await this.eventBusService.publish({
-      topic: Topic.VEHICLE_MISSION,
-      payload: mission,
-    });
-
+    await this.eventBusService.publish(Topic.VEHICLE_MISSION, mission);
     return mission;
   }
 }

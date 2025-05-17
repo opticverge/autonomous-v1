@@ -4,11 +4,16 @@ import { VehicleMissionController } from '@autonomous/vehicle-mission/vehicle-mi
 import { VehicleMissionService } from '@autonomous/vehicle-mission/vehicle-mission.service';
 import { VehicleMissionStatusService } from '@autonomous/vehicle-mission/vehicle-mission-status.service';
 import { MessagingModule } from '@autonomous/messaging/messaging.module';
+import { VehicleMissionStatusListener } from './listeners/vehicle-mission-status-listener';
 
 @Module({
   imports: [DatabaseModule, MessagingModule],
   controllers: [VehicleMissionController],
-  providers: [VehicleMissionService, VehicleMissionStatusService],
+  providers: [
+    VehicleMissionService,
+    VehicleMissionStatusService,
+    VehicleMissionStatusListener,
+  ],
   exports: [VehicleMissionService, VehicleMissionStatusService],
 })
 export class VehicleMissionModule {}

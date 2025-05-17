@@ -1,0 +1,25 @@
+import { Injectable, Logger } from '@nestjs/common';
+import { OnEvent } from '@nestjs/event-emitter';
+import { Topic, VehicleMissionResponse } from '@autonomous/shared/types';
+import { VehicleMissionStatusService } from '@autonomous/vehicle-mission/vehicle-mission-status.service';
+
+@Injectable()
+export class VehicleMissionStatusListener {
+  private readonly logger = new Logger(VehicleMissionStatusListener.name);
+
+  constructor(
+    private readonly vehicleMissionStatusService: VehicleMissionStatusService,
+  ) {}
+
+  @OnEvent(Topic.VEHICLE_MISSION_STATUS)
+  async handleVehicleMissionStatusEvent(payload: VehicleMissionResponse) {
+    try {
+      await this.vehicleMissionStatusService.create(payload);
+    } catch (error) {
+      this.logger.error('Error while handling vehicle mission status event', {
+        error: error instanceof Error ? error : JSON.stringify(error),
+        payload,
+      });
+    }
+  }
+}

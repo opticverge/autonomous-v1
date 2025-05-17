@@ -1,26 +1,23 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { TelemetryService } from '@autonomous/mqtt/services';
-import { VehicleTelemetryDto } from 'src/mqtt/dtos';
-import { Topic, VehicleMissionResponse } from '@autonomous/shared/types';
-import { VehicleMissionStatusService } from '@autonomous/vehicle-mission/vehicle-mission-status.service';
+import {
+  Topic,
+  VehicleMissionResponse,
+  VehicleTelemetry,
+} from '@autonomous/shared/types';
+import { EventService } from '@autonomous/event/event.service';
 
 @Controller()
 export class MqttController {
-  constructor(
-    private readonly telemetryService: TelemetryService,
-    private readonly vehicleMissionStatusService: VehicleMissionStatusService,
-  ) {}
+  constructor(private readonly eventService: EventService) {}
 
   @MessagePattern(Topic.VEHICLE_TELEMETRY)
-  async handleVehicleTelemetry(@Payload() payload: VehicleTelemetryDto) {
-    await this.telemetryService.process(payload);
+  vehicleTelemetryHandler(@Payload() payload: VehicleTelemetry) {
+    this.eventService.emit(Topic.VEHICLE_TELEMETRY, payload);
   }
 
   @MessagePattern(Topic.VEHICLE_MISSION_STATUS)
-  async handleVehicleMissionResponse(
-    @Payload() payload: VehicleMissionResponse,
-  ) {
-    await this.vehicleMissionStatusService.create(payload);
+  vehicleMissionResponseHandler(@Payload() payload: VehicleMissionResponse) {
+    this.eventService.emit(Topic.VEHICLE_MISSION_STATUS, payload);
   }
 }

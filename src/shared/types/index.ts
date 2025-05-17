@@ -83,32 +83,39 @@ export enum Topic {
   VEHICLE_MISSION_STATUS = 'vehicle/mission/status',
 }
 
-export type MqttPayload =
+export type MessagePayload =
   | VehicleMissionStatusResponse
   | VehicleTelemetry
   | VehicleMissionResponse;
 
-export type BaseMqttMessage<T extends Topic, P extends MqttPayload> = {
+export type BaseMessage<T extends Topic, P extends MessagePayload> = {
   topic: T;
   payload: P;
 };
 
-export type VehicleTelemetryEvent = BaseMqttMessage<
+export type VehicleTelemetryEvent = BaseMessage<
   Topic.VEHICLE_TELEMETRY,
   VehicleTelemetry
 >;
 
-export type VehicleMissionEvent = BaseMqttMessage<
+export type VehicleMissionEvent = BaseMessage<
   Topic.VEHICLE_MISSION,
   VehicleMissionStatusResponse
 >;
 
-export type VehicleMissionStatusEvent = BaseMqttMessage<
+export type VehicleMissionStatusEvent = BaseMessage<
   Topic.VEHICLE_MISSION_STATUS,
   VehicleMissionResponse
 >;
 
-export type MqttEvent =
+export type AppEvent =
   | VehicleMissionEvent
   | VehicleTelemetryEvent
   | VehicleMissionStatusEvent;
+
+export type AppEventTopic = AppEvent['topic'];
+
+export type EventPayload<T extends AppEventTopic> = Extract<
+  AppEvent,
+  { topic: T }
+>['payload'];
