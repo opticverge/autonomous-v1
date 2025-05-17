@@ -4,7 +4,7 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
 import { randomUUID } from 'crypto';
 import { GlobalExceptionsFilter } from '@autonomous/common/filter/global-exceptions.filter';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
@@ -25,7 +25,7 @@ async function bootstrap() {
     },
   });
 
-  app.enableVersioning();
+  app.enableVersioning({ defaultVersion: '1', type: VersioningType.URI });
 
   app.useGlobalFilters(new GlobalExceptionsFilter());
 
