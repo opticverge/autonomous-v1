@@ -1,7 +1,7 @@
-import { Location, VehicleTelemetry } from '@autonomous/mqtt/types';
+import { VehicleTelemetry, VehicleLocation } from '@autonomous/shared/types';
 
 export class VehicleTelemetryDto implements VehicleTelemetry {
-  location: Location;
+  location: VehicleLocation;
   status: string;
   timestamp: Date;
   vehicleId: string;
