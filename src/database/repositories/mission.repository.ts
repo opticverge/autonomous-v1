@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MissionEntity } from '@autonomous/database/entities';
 import { MongoRepository } from 'typeorm';
-import { CreateMission } from '@autonomous/shared/types';
+import { CreateMission, Mission } from '@autonomous/shared/types';
 
 @Injectable()
 export class MissionRepository {
@@ -11,8 +11,10 @@ export class MissionRepository {
     private readonly repository: MongoRepository<MissionEntity>,
   ) {}
 
-  async create(data: CreateMission): Promise<MissionEntity> {
+  async create(data: CreateMission): Promise<Mission> {
     const entity = this.repository.create(data);
-    return await this.repository.save(entity);
+    const saved = await this.repository.save(entity);
+    const { _id: _, ...response } = saved;
+    return response;
   }
 }

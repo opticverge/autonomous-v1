@@ -3,28 +3,37 @@ import {
   VehicleMissionEntity,
   VehicleMissionStatusEntity,
   TelemetryEntity,
+  Location,
 } from '@autonomous/database/entities';
+
+export type VehicleLocation = Location;
+
+export type Telemetry = Pick<
+  TelemetryEntity,
+  'vehicleId' | 'status' | 'timestamp' | 'location'
+>;
 
 export type CreateMission = Pick<
   MissionEntity,
   'missionId' | 'description' | 'name'
 >;
 
-export type CreateMissionRequest = CreateMission;
-
-export type CreateMissionResponse = Pick<
+export type Mission = Pick<
   MissionEntity,
   'missionId' | 'name' | 'description' | 'createdAt' | 'updatedAt'
 >;
 
-export type VehicleMission = Pick<
+export type CreateVehicleMission = Pick<
   VehicleMissionEntity,
   'vehicleMissionId' | 'vehicleId' | 'missionId'
 >;
 
-export type CreateVehicleMissionRequest = VehicleMission;
+export type VehicleMission = Pick<
+  VehicleMissionEntity,
+  'vehicleMissionId' | 'vehicleId' | 'missionId' | 'createdAt' | 'updatedAt'
+>;
 
-export type CreateVehicleMissionResponse = Pick<
+export type VehicleMissionStatusResponse = Pick<
   VehicleMissionEntity,
   'missionId' | 'vehicleMissionId' | 'vehicleId' | 'createdAt' | 'updatedAt'
 > &
@@ -32,9 +41,14 @@ export type CreateVehicleMissionResponse = Pick<
 
 export type VehicleMissionStatus = Pick<
   VehicleMissionStatusEntity,
-  'vehicleMissionId' | 'status'
+  'vehicleMissionId' | 'status' | 'timestamp'
+>;
+
+export type CreateVehicleMissionStatus = Pick<
+  VehicleMissionStatus,
+  'status' | 'vehicleMissionId'
 > &
-  Pick<Partial<VehicleMissionStatusEntity>, 'timestamp'>;
+  Pick<Partial<VehicleMissionStatus>, 'timestamp'>;
 
 export type CreateVehicleMissionStatusRequest = VehicleMissionStatus;
 
@@ -60,7 +74,7 @@ export enum Topic {
 }
 
 export type MqttPayload =
-  | CreateVehicleMissionResponse
+  | VehicleMissionStatusResponse
   | VehicleTelemetry
   | VehicleMissionResponse;
 
@@ -76,7 +90,7 @@ export type VehicleTelemetryEvent = BaseMqttMessage<
 
 export type VehicleMissionEvent = BaseMqttMessage<
   Topic.VEHICLE_MISSION,
-  CreateVehicleMissionResponse
+  VehicleMissionStatusResponse
 >;
 
 export type VehicleMissionStatusEvent = BaseMqttMessage<

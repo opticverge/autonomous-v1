@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { VehicleMissionStatusEntity } from '@autonomous/database/entities';
 import { MongoRepository } from 'typeorm';
-import { VehicleMissionStatus } from '@autonomous/shared/types';
+import {
+  CreateVehicleMissionStatus,
+  VehicleMissionStatus,
+} from '@autonomous/shared/types';
 import { DateTime } from 'luxon';
 
 @Injectable()
@@ -12,9 +15,13 @@ export class VehicleMissionStatusRepository {
     private readonly repository: MongoRepository<VehicleMissionStatusEntity>,
   ) {}
 
-  async create(data: VehicleMissionStatus) {
+  async create(
+    data: CreateVehicleMissionStatus,
+  ): Promise<VehicleMissionStatus> {
     data.timestamp = data?.timestamp || DateTime.utc().toJSDate();
     const entity = this.repository.create(data);
-    return await this.repository.save(entity);
+    const saved = await this.repository.save(entity);
+    const { _id: _, ...response } = saved;
+    return response;
   }
 }
