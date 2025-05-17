@@ -23,6 +23,8 @@ async function bootstrap() {
     },
   });
 
+  app.enableVersioning();
+
   app.useGlobalFilters(new GlobalExceptionsFilter());
 
   await app.startAllMicroservices();
