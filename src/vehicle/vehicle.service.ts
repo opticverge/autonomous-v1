@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import {CreateVehicle, UpdateVehicle, Vehicle} from '@autonomous/shared/types';
+import {
+  CreateVehicle,
+  UpdateVehicle,
+  Vehicle,
+} from '@autonomous/shared/types';
 import { VehicleRepository } from '@autonomous/database/repositories';
 import { Nullable } from '@autonomous/common/types';
 
