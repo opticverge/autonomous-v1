@@ -4,12 +4,16 @@ import { AppService } from '@autonomous/app.service';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from '@autonomous/database/database.module';
 import { MqttModule } from '@autonomous/mqtt/mqtt.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
+    }),
+    JwtModule.register({
+      global: true,
     }),
     DatabaseModule,
     MqttModule,
