@@ -5,20 +5,22 @@ import {
   OnModuleDestroy,
   OnModuleInit,
 } from '@nestjs/common';
-import { MQTT_SERVICE_NAME } from '@autonomous/mqtt/mqtt.constants';
 import { ClientProxy } from '@nestjs/microservices';
+import { MqttEvent } from '@autonomous/shared/types';
 import { firstValueFrom } from 'rxjs';
+import { MQTT_EVENT_BUS_NAME } from '@autonomous/messaging';
 
 @Injectable()
-export class MqttService implements OnModuleInit, OnModuleDestroy {
-  private readonly logger = new Logger(MqttService.name);
+export class MqttEventBusService implements OnModuleInit, OnModuleDestroy {
+  private readonly logger = new Logger(MqttEventBusService.name);
 
   constructor(
-    @Inject(MQTT_SERVICE_NAME) private readonly client: ClientProxy,
+    @Inject(MQTT_EVENT_BUS_NAME) private readonly client: ClientProxy,
   ) {}
 
-  async emit(topic: any, data: any): Promise<void> {
-    return firstValueFrom(this.client.emit(topic, data));
+  async publish(message: MqttEvent): Promise<void> {
+    const { topic, payload } = message;
+    return firstValueFrom(this.client.emit(topic, payload));
   }
 
   async onModuleInit() {

@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { VehicleRepository } from './vehicle.repository';
+import { MqttEventBusService } from './mqtt-event-bus.service';
 
-describe('VehicleRepositoryService', () => {
-  let service: VehicleRepository;
+describe('MqttEventBusService', () => {
+  let service: MqttEventBusService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [VehicleRepository],
+      providers: [MqttEventBusService],
     }).compile();
 
-    service = module.get<VehicleRepository>(VehicleRepository);
+    service = module.get<MqttEventBusService>(MqttEventBusService);
   });
 
   it('should be defined', () => {
