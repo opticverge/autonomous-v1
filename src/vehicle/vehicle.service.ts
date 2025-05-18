@@ -16,7 +16,7 @@ export class VehicleService {
   }
 
   async find(vehicleId: string): Promise<Nullable<Vehicle>> {
-    const result = await this.vehicleRepository.find(vehicleId);
+    const result = await this.vehicleRepository.findById(vehicleId);
     if (!result) {
       throw new NotFoundException();
     }

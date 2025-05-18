@@ -22,7 +22,7 @@ export class TelemetryService {
       return;
     }
 
-    const vehicle = await this.vehicleRepository.find(telemetry.vehicleId);
+    const vehicle = await this.vehicleRepository.findById(telemetry.vehicleId);
 
     if (vehicle == null) {
       this.logger.error(
@@ -34,7 +34,7 @@ export class TelemetryService {
     await this.telemetryRepository.create(telemetry);
 
     this.logger.log(
-      `Telemetry data processed for vehicle ${telemetry.vehicleId}`,
+      `Telemetry data processed for vehicle:${telemetry.vehicleId}`,
     );
   }
 }

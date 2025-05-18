@@ -23,7 +23,7 @@ export class VehicleRepository {
     return response;
   }
 
-  async find(vehicleId: string): Promise<Nullable<Vehicle>> {
+  async findById(vehicleId: string): Promise<Nullable<Vehicle>> {
     const entity = await this.repository.findOne({
       where: { vehicleId },
     });
