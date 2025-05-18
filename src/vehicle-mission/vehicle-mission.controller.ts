@@ -1,23 +1,23 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CreateVehicleMissionDto } from '@autonomous/vehicle-mission/dtos';
 import { VehicleMissionService } from '@autonomous/vehicle-mission/vehicle-mission.service';
-import { Topic } from '@autonomous/shared/types';
-import { MqttPublisherService } from '@autonomous/messaging';
 import { JwtGuard } from '@autonomous/common/guards';
+import { EventService } from '@autonomous/event/event.service';
+import { EventTopic } from '@autonomous/shared/types';
 
 @UseGuards(JwtGuard)
 @Controller({ path: 'vehicle-mission', version: '1' })
 export class VehicleMissionController {
   constructor(
     private readonly vehicleMissionService: VehicleMissionService,
-    private readonly publisher: MqttPublisherService,
+    private readonly eventService: EventService,
   ) {}
 
   @Post()
   async create(@Body() payload: CreateVehicleMissionDto) {
-    const mission = await this.vehicleMissionService.create(payload);
-    await this.publisher.publish(Topic.VEHICLE_MISSION, mission);
-    return mission;
+    const result = await this.vehicleMissionService.create(payload);
+    this.eventService.emit(EventTopic.CREATE_VEHICLE_MISSION, result);
+    return result;
   }
 
   @Get(':id')
