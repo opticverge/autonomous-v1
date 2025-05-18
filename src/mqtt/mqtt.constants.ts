@@ -1,0 +1,1 @@
+export const MQTT_SERVICE_NAME = 'MQTT_SERVICE';
