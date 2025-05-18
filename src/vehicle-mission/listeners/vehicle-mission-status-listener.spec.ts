@@ -58,9 +58,11 @@ describe('VehicleMissionStatusListenerService', () => {
       await service.handleVehicleMissionStatusEvent(payload);
 
       expect(mockLogger.log).toHaveBeenCalledWith(
-        `Processing ${EventTopic.VEHICLE_MISSION_STATUS} event for vehicle:${payload.vehicleId}`
+        `Processing ${EventTopic.VEHICLE_MISSION_STATUS} event for vehicle:${payload.vehicleId}`,
       );
-      expect(mockVehicleMissionStatusService.create).toHaveBeenCalledWith(payload);
+      expect(mockVehicleMissionStatusService.create).toHaveBeenCalledWith(
+        payload,
+      );
       expect(mockLogger.error).not.toHaveBeenCalled();
     });
 
@@ -78,15 +80,17 @@ describe('VehicleMissionStatusListenerService', () => {
       await service.handleVehicleMissionStatusEvent(payload);
 
       expect(mockLogger.log).toHaveBeenCalledWith(
-        `Processing ${EventTopic.VEHICLE_MISSION_STATUS} event for vehicle:${payload.vehicleId}`
+        `Processing ${EventTopic.VEHICLE_MISSION_STATUS} event for vehicle:${payload.vehicleId}`,
       );
-      expect(mockVehicleMissionStatusService.create).toHaveBeenCalledWith(payload);
+      expect(mockVehicleMissionStatusService.create).toHaveBeenCalledWith(
+        payload,
+      );
       expect(mockLogger.error).toHaveBeenCalledWith(
         'Error while handling vehicle mission status event',
         {
           error,
           payload,
-        }
+        },
       );
     });
 
@@ -104,15 +108,17 @@ describe('VehicleMissionStatusListenerService', () => {
       await service.handleVehicleMissionStatusEvent(payload);
 
       expect(mockLogger.log).toHaveBeenCalledWith(
-        `Processing ${EventTopic.VEHICLE_MISSION_STATUS} event for vehicle:${payload.vehicleId}`
+        `Processing ${EventTopic.VEHICLE_MISSION_STATUS} event for vehicle:${payload.vehicleId}`,
       );
-      expect(mockVehicleMissionStatusService.create).toHaveBeenCalledWith(payload);
+      expect(mockVehicleMissionStatusService.create).toHaveBeenCalledWith(
+        payload,
+      );
       expect(mockLogger.error).toHaveBeenCalledWith(
         'Error while handling vehicle mission status event',
         {
           error: JSON.stringify(errorObj),
           payload,
-        }
+        },
       );
     });
   });

@@ -57,15 +57,21 @@ describe('TelemetryService', () => {
   describe('findByVehicleId', () => {
     it('should find telemetry data for a valid vehicle ID', async () => {
       const vehicleId = 'test-vehicle-id';
-      const mockTelemetryData = [{ vehicleId, timestamp: new Date() }] as VehicleTelemetry[];
+      const mockTelemetryData = [
+        { vehicleId, timestamp: new Date() },
+      ] as VehicleTelemetry[];
 
       mockVehicleService.find.mockResolvedValue({ id: vehicleId });
-      mockTelemetryRepository.findByVehicleId.mockResolvedValue(mockTelemetryData);
+      mockTelemetryRepository.findByVehicleId.mockResolvedValue(
+        mockTelemetryData,
+      );
 
       const result = await service.findByVehicleId(vehicleId);
 
       expect(mockVehicleService.find).toHaveBeenCalledWith(vehicleId);
-      expect(mockTelemetryRepository.findByVehicleId).toHaveBeenCalledWith(vehicleId);
+      expect(mockTelemetryRepository.findByVehicleId).toHaveBeenCalledWith(
+        vehicleId,
+      );
       expect(result).toEqual(mockTelemetryData);
     });
 
@@ -81,7 +87,10 @@ describe('TelemetryService', () => {
 
   describe('process', () => {
     it('should process valid telemetry data', async () => {
-      const telemetry = { vehicleId: 'test-vehicle-id', timestamp: new Date() } as VehicleTelemetry;
+      const telemetry = {
+        vehicleId: 'test-vehicle-id',
+        timestamp: new Date(),
+      } as VehicleTelemetry;
 
       mockVehicleService.find.mockResolvedValue({ id: telemetry.vehicleId });
       mockTelemetryRepository.create.mockResolvedValue(undefined);
@@ -91,7 +100,7 @@ describe('TelemetryService', () => {
       expect(mockVehicleService.find).toHaveBeenCalledWith(telemetry.vehicleId);
       expect(mockTelemetryRepository.create).toHaveBeenCalledWith(telemetry);
       expect(mockLogger.log).toHaveBeenCalledWith(
-        `Telemetry data processed for vehicle:${telemetry.vehicleId}`
+        `Telemetry data processed for vehicle:${telemetry.vehicleId}`,
       );
     });
 
@@ -103,12 +112,15 @@ describe('TelemetryService', () => {
       expect(mockVehicleService.find).not.toHaveBeenCalled();
       expect(mockTelemetryRepository.create).not.toHaveBeenCalled();
       expect(mockLogger.error).toHaveBeenCalledWith(
-        expect.stringContaining('Vehicle ID is missing in telemetry data')
+        expect.stringContaining('Vehicle ID is missing in telemetry data'),
       );
     });
 
     it('should not process telemetry data for non-existent vehicle', async () => {
-      const telemetry = { vehicleId: 'non-existent-vehicle', timestamp: new Date() } as VehicleTelemetry;
+      const telemetry = {
+        vehicleId: 'non-existent-vehicle',
+        timestamp: new Date(),
+      } as VehicleTelemetry;
 
       mockVehicleService.find.mockRejectedValue(new Error('Vehicle not found'));
 
@@ -117,7 +129,7 @@ describe('TelemetryService', () => {
       expect(mockVehicleService.find).toHaveBeenCalledWith(telemetry.vehicleId);
       expect(mockTelemetryRepository.create).not.toHaveBeenCalled();
       expect(mockLogger.error).toHaveBeenCalledWith(
-        expect.stringContaining('Vehicle not found for telemetry data')
+        expect.stringContaining('Vehicle not found for telemetry data'),
       );
     });
   });

@@ -44,21 +44,27 @@ describe('VehicleTelemetryListenerService', () => {
 
   describe('handleVehicleTelemetryEvent', () => {
     it('should process telemetry data successfully', async () => {
-      const payload = { vehicleId: 'test-vehicle-id', timestamp: new Date() } as VehicleTelemetry;
+      const payload = {
+        vehicleId: 'test-vehicle-id',
+        timestamp: new Date(),
+      } as VehicleTelemetry;
 
       mockTelemetryService.process.mockResolvedValue(undefined);
 
       await service.handleVehicleTelemetryEvent(payload);
 
       expect(mockLogger.log).toHaveBeenCalledWith(
-        `Received vehicle telemetry event for vehicle:${payload.vehicleId}`
+        `Received vehicle telemetry event for vehicle:${payload.vehicleId}`,
       );
       expect(mockTelemetryService.process).toHaveBeenCalledWith(payload);
       expect(mockLogger.error).not.toHaveBeenCalled();
     });
 
     it('should handle errors when processing telemetry data', async () => {
-      const payload = { vehicleId: 'test-vehicle-id', timestamp: new Date() } as VehicleTelemetry;
+      const payload = {
+        vehicleId: 'test-vehicle-id',
+        timestamp: new Date(),
+      } as VehicleTelemetry;
       const error = new Error('Test error');
 
       mockTelemetryService.process.mockRejectedValue(error);
@@ -66,7 +72,7 @@ describe('VehicleTelemetryListenerService', () => {
       await service.handleVehicleTelemetryEvent(payload);
 
       expect(mockLogger.log).toHaveBeenCalledWith(
-        `Received vehicle telemetry event for vehicle:${payload.vehicleId}`
+        `Received vehicle telemetry event for vehicle:${payload.vehicleId}`,
       );
       expect(mockTelemetryService.process).toHaveBeenCalledWith(payload);
       expect(mockLogger.error).toHaveBeenCalledWith(
@@ -74,12 +80,15 @@ describe('VehicleTelemetryListenerService', () => {
         {
           error,
           payload,
-        }
+        },
       );
     });
 
     it('should handle non-Error objects in catch block', async () => {
-      const payload = { vehicleId: 'test-vehicle-id', timestamp: new Date() } as VehicleTelemetry;
+      const payload = {
+        vehicleId: 'test-vehicle-id',
+        timestamp: new Date(),
+      } as VehicleTelemetry;
       const errorObj = { message: 'Non-error object' };
 
       mockTelemetryService.process.mockRejectedValue(errorObj);
@@ -87,7 +96,7 @@ describe('VehicleTelemetryListenerService', () => {
       await service.handleVehicleTelemetryEvent(payload);
 
       expect(mockLogger.log).toHaveBeenCalledWith(
-        `Received vehicle telemetry event for vehicle:${payload.vehicleId}`
+        `Received vehicle telemetry event for vehicle:${payload.vehicleId}`,
       );
       expect(mockTelemetryService.process).toHaveBeenCalledWith(payload);
       expect(mockLogger.error).toHaveBeenCalledWith(
@@ -95,7 +104,7 @@ describe('VehicleTelemetryListenerService', () => {
         {
           error: JSON.stringify(errorObj),
           payload,
-        }
+        },
       );
     });
   });

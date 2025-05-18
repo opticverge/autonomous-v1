@@ -55,7 +55,9 @@ describe('MissionService', () => {
 
       const result = await service.create(createMissionDto);
 
-      expect(mockMissionRepository.create).toHaveBeenCalledWith(createMissionDto);
+      expect(mockMissionRepository.create).toHaveBeenCalledWith(
+        createMissionDto,
+      );
       expect(result).toEqual(expectedResult);
     });
   });
@@ -121,7 +123,9 @@ describe('MissionService', () => {
 
       mockMissionRepository.findById.mockResolvedValue(null);
 
-      await expect(service.findById(missionId)).rejects.toThrow(NotFoundException);
+      await expect(service.findById(missionId)).rejects.toThrow(
+        NotFoundException,
+      );
       expect(mockMissionRepository.findById).toHaveBeenCalledWith(missionId);
     });
   });
