@@ -17,4 +17,16 @@ export class TelemetryRepository {
     const { _id: _, ...response } = saved;
     return response;
   }
+
+  async findByVehicleId(vehicleId: string): Promise<Telemetry[]> {
+    const telemetry = await this.repository.find({ vehicleId });
+    if (telemetry == null) {
+      return [];
+    }
+
+    return telemetry.map((entity) => {
+      const { _id: _, ...response } = entity;
+      return response;
+    });
+  }
 }

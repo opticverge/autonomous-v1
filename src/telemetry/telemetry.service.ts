@@ -1,18 +1,21 @@
 import { Injectable, Logger } from '@nestjs/common';
-import {
-  TelemetryRepository,
-  VehicleRepository,
-} from '@autonomous/database/repositories';
+import { TelemetryRepository } from '@autonomous/database/repositories';
 import { VehicleTelemetry } from '@autonomous/shared/types';
+import { VehicleService } from '@autonomous/vehicle/vehicle.service';
 
 @Injectable()
 export class TelemetryService {
   private readonly logger = new Logger(TelemetryService.name);
 
   constructor(
-    private readonly vehicleRepository: VehicleRepository,
+    private readonly vehicleService: VehicleService,
     private readonly telemetryRepository: TelemetryRepository,
   ) {}
+
+  async findByVehicleId(vehicleId: string): Promise<VehicleTelemetry[]> {
+    await this.vehicleService.find(vehicleId);
+    return await this.telemetryRepository.findByVehicleId(vehicleId);
+  }
 
   async process(telemetry: VehicleTelemetry): Promise<void> {
     if (telemetry?.vehicleId == null) {
@@ -22,11 +25,11 @@ export class TelemetryService {
       return;
     }
 
-    const vehicle = await this.vehicleRepository.findById(telemetry.vehicleId);
-
-    if (vehicle == null) {
+    try {
+      await this.vehicleService.find(telemetry.vehicleId);
+    } catch {
       this.logger.error(
-        `Vehicle not found, telemetry not processed for ${JSON.stringify(telemetry)}`,
+        `Vehicle not found for telemetry data, telemetry not processed for vehicle:${telemetry?.vehicleId} payload:${JSON.stringify(telemetry)}`,
       );
       return;
     }

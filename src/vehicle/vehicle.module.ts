@@ -7,5 +7,6 @@ import { DatabaseModule } from '@autonomous/database/database.module';
   imports: [DatabaseModule],
   controllers: [VehicleController],
   providers: [VehicleService],
+  exports: [VehicleService],
 })
 export class VehicleModule {}
