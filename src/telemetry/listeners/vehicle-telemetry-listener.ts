@@ -13,7 +13,6 @@ export class VehicleTelemetryListener {
     try {
       this.logger.log(
         `Received vehicle telemetry event for vehicle:${payload.vehicleId}`,
-        payload,
       );
 
       await this.telemetryService.process(payload);
