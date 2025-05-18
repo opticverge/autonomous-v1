@@ -1,18 +1,15 @@
+import argparse
 import json
 import os
 import random
-import argparse
-import time
-from xmlrpc.client import DateTime
-
-import paho.mqtt.client as mqtt
 from datetime import datetime, timezone
 
+import paho.mqtt.client as mqtt
 from paho.mqtt.packettypes import PacketTypes
 from paho.mqtt.properties import Properties
 
 
-def generate_telemetry_data(vehicle_id="VEH-001"):
+def generate_telemetry_data(vehicle_id="VEH-001", status="idle"):
     """Generate simulated vehicle telemetry data"""
     data = {
         "vehicleId": vehicle_id,
@@ -21,20 +18,7 @@ def generate_telemetry_data(vehicle_id="VEH-001"):
             "type": "Point",
             "coordinates": [-122.4194 + random.uniform(-0.01, 0.01), 37.7749 + random.uniform(-0.01, 0.01)]
         },
-        #         "speed": random.uniform(0, 120),  # km/h
-        #         "heading": random.uniform(0, 359),  # degrees
-        #         "engineData": {
-        #             "rpm": random.uniform(800, 3500),
-        #             "temperature": random.uniform(80, 105),
-        #             "fuelLevel": random.uniform(0, 100),
-        #         },
-        #         "batteryVoltage": 12 + random.uniform(-0.5, 0.5),
-        #         "tireData": {
-        #             "frontLeft": random.uniform(30, 36),
-        #             "frontRight": random.uniform(30, 36),
-        #             "rearLeft": random.uniform(30, 36),
-        #             "rearRight": random.uniform(30, 36),
-        #         },
+        "status": status,
     }
     return data
 
@@ -71,13 +55,13 @@ def main():
     parser = argparse.ArgumentParser(description='Send vehicle telemetry data over MQTT')
     parser.add_argument('--broker', default='emqx', help='MQTT broker address')
     parser.add_argument('--port', type=int, default=1883, help='MQTT broker port')
-    parser.add_argument('--topic', default='vehicle/telemetry', help='MQTT topic')
-    parser.add_argument('--vehicle', default=os.getenv('VEHICLE_ID'), help='Vehicle ID')
+    parser.add_argument('--topic', default='vehicle/1/telemetry', help='MQTT topic', required=True)
+    parser.add_argument('--vehicle', default=os.getenv('VEHICLE_ID'), help='Vehicle ID', required=True)
     parser.add_argument('--qos', type=int, default=1, choices=[0, 1, 2], help='MQTT QoS level')
     parser.add_argument('--username', help='MQTT broker username', default='autonomous')
     parser.add_argument('--password', help='MQTT broker password', default='autonomous')
     parser.add_argument('--apikey', help='api key for the request', default='')
-    parser.add_argument('--status', help='the vehicle status', default='')
+    parser.add_argument('--status', help='the vehicle status', default='idle')
 
     args = parser.parse_args()
 
@@ -108,7 +92,7 @@ def main():
 
         # Generate and send telemetry
         try:
-            telemetry = generate_telemetry_data(args.vehicle, arg.status)
+            telemetry = generate_telemetry_data(args.vehicle, args.status)
             payload = json.dumps(telemetry)
 
             print(f"Sending telemetry data to {args.topic}...")
