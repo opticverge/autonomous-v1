@@ -1,0 +1,431 @@
+{
+	"info": {
+		"_postman_id": "fe6fc6d4-03dd-49a7-8bba-1951b28354c8",
+		"name": "autonomous",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40237053"
+	},
+	"item": [
+		{
+			"name": "Create Mission",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    // \"vehicleId\": \"ae8bf801-8886-4bb1-9c6b-5acabc16a8db\",\r\n    // \"missionId\": \"7abc702b-3145-425b-bc1e-d902d9ac014d\", 1a3faaac-d544-4657-8309-b8f1d3635469\r\n    \"name\": \"Topology Exploration\",\r\n    \"description\": \"Maps the topology of the landscape if available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCAL}}/v1/mission",
+					"host": [
+						"{{LOCAL}}"
+					],
+					"path": [
+						"v1",
+						"mission"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Missions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    // \"vehicleId\": \"ae8bf801-8886-4bb1-9c6b-5acabc16a8db\",\r\n    // \"missionId\": \"7abc702b-3145-425b-bc1e-d902d9ac014d\", 1a3faaac-d544-4657-8309-b8f1d3635469\r\n    \"name\": \"Topology Exploration\",\r\n    \"description\": \"Maps the topology of the landscape if available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCAL}}/v1/mission",
+					"host": [
+						"{{LOCAL}}"
+					],
+					"path": [
+						"v1",
+						"mission"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Mission",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    // \"vehicleId\": \"ae8bf801-8886-4bb1-9c6b-5acabc16a8db\",\r\n    // \"missionId\": \"7abc702b-3145-425b-bc1e-d902d9ac014d\", 1a3faaac-d544-4657-8309-b8f1d3635469\r\n    \"name\": \"Topology Exploration\",\r\n    \"description\": \"Maps the topology of the landscape if available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCAL}}/v1/mission/1a3faaac-d544-4657-8309-b8f1d3635469",
+					"host": [
+						"{{LOCAL}}"
+					],
+					"path": [
+						"v1",
+						"mission",
+						"1a3faaac-d544-4657-8309-b8f1d3635469"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vehicle",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{LOCAL}}/v1/vehicle/ae8bf801-8886-4bb1-9c6b-5acabc16a8db",
+					"host": [
+						"{{LOCAL}}"
+					],
+					"path": [
+						"v1",
+						"vehicle",
+						"ae8bf801-8886-4bb1-9c6b-5acabc16a8db"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vehicles",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{LOCAL}}/v1/vehicle",
+					"host": [
+						"{{LOCAL}}"
+					],
+					"path": [
+						"v1",
+						"vehicle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Vehicle",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Drone 5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCAL}}/v1/vehicle",
+					"host": [
+						"{{LOCAL}}"
+					],
+					"path": [
+						"v1",
+						"vehicle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Vehicle",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"My test vehicle name\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCAL}}/v1/vehicle/ae8bf801-8886-4bb1-9c6b-5acabc16a8db",
+					"host": [
+						"{{LOCAL}}"
+					],
+					"path": [
+						"v1",
+						"vehicle",
+						"ae8bf801-8886-4bb1-9c6b-5acabc16a8db"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Vehicle Mission",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vehicleId\": \"c8164f4a-a92f-4a81-ab26-d59f6dc8dbb8\",\r\n    \"missionId\": \"1a3faaac-d544-4657-8309-b8f1d3635469\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCAL}}/v1/vehicle-mission",
+					"host": [
+						"{{LOCAL}}"
+					],
+					"path": [
+						"v1",
+						"vehicle-mission"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vehicle Missions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{LOCAL}}/v1/vehicle-mission",
+					"host": [
+						"{{LOCAL}}"
+					],
+					"path": [
+						"v1",
+						"vehicle-mission"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vehicle Mission",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{LOCAL}}/v1/vehicle-mission/missionid",
+					"host": [
+						"{{LOCAL}}"
+					],
+					"path": [
+						"v1",
+						"vehicle-mission",
+						"missionid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Report",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{LOCAL}}/v1/reports/missions",
+					"host": [
+						"{{LOCAL}}"
+					],
+					"path": [
+						"v1",
+						"reports",
+						"missions"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "JWT_TOKEN",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "LOCAL",
+			"value": "http://localhost:3000",
+			"type": "default"
+		}
+	]
+}
