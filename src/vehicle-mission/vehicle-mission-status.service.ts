@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { VehicleMissionStatusRepository } from '@autonomous/database/repositories';
-import { VehicleMissionStatus } from '@autonomous/shared/types';
+import { CreateVehicleMissionStatus } from '@autonomous/shared/types';
 
 @Injectable()
 export class VehicleMissionStatusService {
   constructor(private readonly repository: VehicleMissionStatusRepository) {}
 
-  async create(data: VehicleMissionStatus) {
+  async create(data: CreateVehicleMissionStatus) {
     return await this.repository.create(data);
   }
 }
