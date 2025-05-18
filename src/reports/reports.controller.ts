@@ -11,7 +11,7 @@ import {
 @ApiTags('Reports')
 @ApiBearerAuth()
 @UseGuards(JwtGuard)
-@Controller({ path: 'reports', version: '1' })
+@Controller({ path: 'report', version: '1' })
 export class ReportsController {
   constructor(private readonly reportsService: ReportsService) {}
 
