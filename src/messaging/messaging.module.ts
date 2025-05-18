@@ -14,7 +14,13 @@ import { MQTT_PUBLISHER_NAME } from '@autonomous/messaging/messaging.constants';
         useFactory: (configService: ConfigService) => ({
           transport: Transport.MQTT,
           options: {
-            url: configService.getOrThrow<string>('MQTT_URL'),
+            url: [
+              configService.getOrThrow<string>('MQTT_PROTOCOL'),
+              '://',
+              configService.getOrThrow<string>('MQTT_HOST'),
+              ':',
+              configService.getOrThrow<number>('MQTT_PORT'),
+            ].join(''),
             username: configService.getOrThrow<string>('MQTT_USERNAME'),
             password: configService.getOrThrow<string>('MQTT_PASSWORD'),
             protocol: 'mqtt',

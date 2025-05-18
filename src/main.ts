@@ -14,7 +14,13 @@ async function bootstrap() {
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.MQTT,
     options: {
-      url: configService.getOrThrow<string>('MQTT_URL'),
+      url: [
+        configService.getOrThrow<string>('MQTT_PROTOCOL'),
+        '://',
+        configService.getOrThrow<string>('MQTT_HOST'),
+        ':',
+        configService.getOrThrow<number>('MQTT_PORT'),
+      ].join(''),
       username: configService.getOrThrow<string>('MQTT_USERNAME'),
       password: configService.getOrThrow<string>('MQTT_PASSWORD'),
       clientId: `autonomous-backend-listener-${randomUUID()}`,
