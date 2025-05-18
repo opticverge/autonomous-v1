@@ -25,8 +25,14 @@ export class ReportsService {
     }
 
     const vehicleMissionIds = vehicleMissions.map((vm) => vm.vehicleMissionId);
-    const vehicleIds = vehicleMissions.map((vm) => vm.vehicleId);
-    const missionIds = vehicleMissions.map((vm) => vm.missionId);
+
+    const vehicleIds = Array.from(
+      new Set(vehicleMissions.map((vm) => vm.vehicleId)),
+    );
+
+    const missionIds = Array.from(
+      new Set(vehicleMissions.map((vm) => vm.missionId)),
+    );
 
     const [statuses, vehicles, missions] = await Promise.all([
       this.vehicleMissionStatusRepository.findByIds(vehicleMissionIds),
