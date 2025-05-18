@@ -1,9 +1,13 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import {
-  Topic,
+  EventTopic,
   VehicleMissionResponse,
+  VehicleMissionStatusResponse,
+  VehicleMissionStatusTopic,
+  VehicleMissionTopic,
   VehicleTelemetry,
+  VehicleTelemetryTopic,
 } from '@autonomous/shared/types';
 import { EventService } from '@autonomous/event/event.service';
 
@@ -11,13 +15,20 @@ import { EventService } from '@autonomous/event/event.service';
 export class MqttController {
   constructor(private readonly eventService: EventService) {}
 
-  @MessagePattern(Topic.VEHICLE_TELEMETRY)
+  @MessagePattern<VehicleTelemetryTopic>('vehicle/+/telemetry')
   vehicleTelemetryHandler(@Payload() payload: VehicleTelemetry) {
-    this.eventService.emit(Topic.VEHICLE_TELEMETRY, payload);
+    this.eventService.emit(EventTopic.VEHICLE_TELEMETRY, payload);
   }
 
-  @MessagePattern(Topic.VEHICLE_MISSION_STATUS)
+  @MessagePattern<VehicleMissionTopic>('vehicle/+/mission')
+  vehicleMissionSimulationHandler(
+    @Payload() payload: VehicleMissionStatusResponse,
+  ) {
+    this.eventService.emit(EventTopic.VEHICLE_MISSION, payload);
+  }
+
+  @MessagePattern<VehicleMissionStatusTopic>('vehicle/+/mission/status')
   vehicleMissionResponseHandler(@Payload() payload: VehicleMissionResponse) {
-    this.eventService.emit(Topic.VEHICLE_MISSION_STATUS, payload);
+    this.eventService.emit(EventTopic.VEHICLE_MISSION_STATUS, payload);
   }
 }
