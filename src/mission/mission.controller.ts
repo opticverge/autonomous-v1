@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { MissionService } from '@autonomous/mission/mission.service';
 import { CreateMissionDto } from '@autonomous/mission/dtos';
 import { JwtGuard } from '@autonomous/common/guards';
@@ -9,7 +9,17 @@ export class MissionController {
   constructor(private readonly missionService: MissionService) {}
 
   @Post()
-  async createMission(@Body() payload: CreateMissionDto) {
-    return await this.missionService.createMission(payload);
+  async create(@Body() payload: CreateMissionDto) {
+    return await this.missionService.create(payload);
+  }
+
+  @Get()
+  async findAll() {
+    return await this.missionService.findAll();
+  }
+
+  @Get(':id')
+  async getById(@Param('id') id: string) {
+    return await this.missionService.findById(id);
   }
 }
