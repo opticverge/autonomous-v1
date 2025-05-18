@@ -1,13 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import {
   VehicleMissionStatusResponse,
   CreateVehicleMission,
+  VehicleMission,
 } from '@autonomous/shared/types';
 import {
   VehicleMissionRepository,
   VehicleMissionStatusRepository,
 } from '@autonomous/database/repositories';
 import { MissionStatus } from '@autonomous/database/entities';
+import { Nullable } from '@autonomous/common/types';
 
 @Injectable()
 export class VehicleMissionService {
@@ -27,5 +29,17 @@ export class VehicleMissionService {
     });
 
     return { ...entity, ...statusEntity };
+  }
+
+  async findAll(): Promise<VehicleMission[]> {
+    return this.vehicleMissionRepository.findAll();
+  }
+
+  async findById(id: string): Promise<Nullable<VehicleMission>> {
+    const result = await this.vehicleMissionRepository.findById(id);
+    if (!result) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 }

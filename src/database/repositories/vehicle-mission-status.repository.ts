@@ -24,4 +24,37 @@ export class VehicleMissionStatusRepository {
     const { _id: _, ...response } = saved;
     return response;
   }
+
+  async findByIds(ids: string[]) {
+    const entities = await this.repository.find({
+      where: { vehicleMissionId: { $in: ids } },
+    });
+
+    if (!entities) return [];
+
+    return entities.map((entity) => {
+      const { _id: _, ...response } = entity;
+      return response;
+    });
+  }
+
+  async findAll() {
+    const entities = await this.repository.find();
+
+    if (!entities) return [];
+
+    return entities.map((entity) => {
+      const { _id: _, ...response } = entity;
+      return response;
+    });
+  }
+
+  async findById(vehicleMissionId: string) {
+    const entity = await this.repository.findOneBy({ vehicleMissionId });
+
+    if (!entity) return null;
+
+    const { _id: _, ...response } = entity;
+    return response;
+  }
 }

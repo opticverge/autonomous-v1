@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CreateVehicleMissionDto } from '@autonomous/vehicle-mission/dtos';
 import { VehicleMissionService } from '@autonomous/vehicle-mission/vehicle-mission.service';
 import { Topic } from '@autonomous/shared/types';
@@ -14,9 +14,19 @@ export class VehicleMissionController {
   ) {}
 
   @Post()
-  async createVehicleMission(@Body() payload: CreateVehicleMissionDto) {
+  async create(@Body() payload: CreateVehicleMissionDto) {
     const mission = await this.vehicleMissionService.create(payload);
     await this.publisher.publish(Topic.VEHICLE_MISSION, mission);
     return mission;
+  }
+
+  @Get(':id')
+  async findById(@Param('id') id: string) {
+    return await this.vehicleMissionService.findById(id);
+  }
+
+  @Get()
+  async findAll() {
+    return this.vehicleMissionService.findAll();
   }
 }
