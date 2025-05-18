@@ -287,7 +287,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"vehicleId\": \"c8164f4a-a92f-4a81-ab26-d59f6dc8dbb8\",\r\n    \"missionId\": \"1a3faaac-d544-4657-8309-b8f1d3635469\"\r\n}",
+					"raw": "{\r\n    \"vehicleId\": \"ae8bf801-8886-4bb1-9c6b-5acabc16a8db\",\r\n    \"missionId\": \"7cf8eea5-6c6e-4a7c-a14d-196a44d6b0f9\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -380,14 +380,44 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{LOCAL}}/v1/reports/missions",
+					"raw": "{{LOCAL}}/v1/report/missions",
 					"host": [
 						"{{LOCAL}}"
 					],
 					"path": [
 						"v1",
-						"reports",
+						"report",
 						"missions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Telemetry for vehicle",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{LOCAL}}/v1/telemetry/vehicle/ae8bf801-8886-4bb1-9c6b-5acabc16a8db",
+					"host": [
+						"{{LOCAL}}"
+					],
+					"path": [
+						"v1",
+						"telemetry",
+						"vehicle",
+						"ae8bf801-8886-4bb1-9c6b-5acabc16a8db"
 					]
 				}
 			},
