@@ -1,0 +1,1 @@
+export const MQTT_PUBLISHER_NAME = 'MQTT_PUBLISHER';
