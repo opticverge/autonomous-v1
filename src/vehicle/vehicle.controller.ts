@@ -8,7 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtGuard } from '@autonomous/common/guards';
-import { CreateVehicleDto } from '@autonomous/vehicle/dtos';
+import { CreateVehicleDto, UpdateVehicleDto } from '@autonomous/vehicle/dtos';
 import { VehicleService } from '@autonomous/vehicle/vehicle.service';
 
 @UseGuards(JwtGuard)
@@ -17,22 +17,22 @@ export class VehicleController {
   constructor(private readonly vehicleService: VehicleService) {}
 
   @Post()
-  async createVehicle(@Body() dto: CreateVehicleDto) {
+  async create(@Body() dto: CreateVehicleDto) {
     return await this.vehicleService.create(dto);
   }
 
   @Get(':id')
-  async getVehicle(@Param('id') id: string) {
+  async findById(@Param('id') id: string) {
     return await this.vehicleService.find(id);
   }
 
   @Get()
-  async getVehicles() {
+  async findAll() {
     return await this.vehicleService.findAll();
   }
 
   @Patch(':id')
-  async updateVehicle(@Param('id') id: string, @Body() dto: CreateVehicleDto) {
+  async update(@Param('id') id: string, @Body() dto: UpdateVehicleDto) {
     await this.vehicleService.update(id, dto);
   }
 }

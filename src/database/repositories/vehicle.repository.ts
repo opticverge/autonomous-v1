@@ -48,6 +48,19 @@ export class VehicleRepository {
     });
   }
 
+  async findByIds(ids: string[]) {
+    const entities = await this.repository.find({
+      where: { vehicleId: { $in: ids } },
+    });
+
+    if (!entities) return [];
+
+    return entities.map((entity) => {
+      const { _id: _, ...response } = entity;
+      return response;
+    });
+  }
+
   async update(vehicleId: string, data: UpdateVehicle): Promise<void> {
     await this.repository.update({ vehicleId }, data);
   }

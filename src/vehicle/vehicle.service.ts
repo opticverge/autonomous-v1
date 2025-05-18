@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import {
   CreateVehicle,
   UpdateVehicle,
@@ -16,7 +16,11 @@ export class VehicleService {
   }
 
   async find(vehicleId: string): Promise<Nullable<Vehicle>> {
-    return this.vehicleRepository.find(vehicleId);
+    const result = await this.vehicleRepository.find(vehicleId);
+    if (!result) {
+      throw new NotFoundException();
+    }
+    return result;
   }
 
   async findAll(): Promise<Vehicle[]> {
