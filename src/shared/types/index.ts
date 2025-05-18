@@ -77,6 +77,12 @@ export type VehicleMissionResponse = Pick<
   'vehicleMissionId' | 'timestamp' | 'status'
 >;
 
+export type MissionReport = {
+  vehicle: Vehicle;
+  mission: Mission;
+  statuses: VehicleMissionStatus[];
+};
+
 export enum Topic {
   VEHICLE_MISSION = 'vehicle/mission',
   VEHICLE_TELEMETRY = 'vehicle/telemetry',

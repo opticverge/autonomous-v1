@@ -12,6 +12,7 @@ import { VehicleModule } from '@autonomous/vehicle/vehicle.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { EventModule } from './event/event.module';
 import { TelemetryModule } from './telemetry/telemetry.module';
+import { ReportsModule } from '@autonomous/reports/reports.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { TelemetryModule } from './telemetry/telemetry.module';
     VehicleMissionModule,
     EventModule,
     TelemetryModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

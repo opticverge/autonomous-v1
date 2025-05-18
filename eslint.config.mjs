@@ -36,6 +36,7 @@ export default tseslint.config(
         "ignoreRestSiblings": true,
         "varsIgnorePattern": "^_",
       }],
+      '@typescript-eslint/unbound-method': 'off'
     },
   },
 );
