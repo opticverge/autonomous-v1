@@ -25,7 +25,7 @@ export class VehicleMissionStatusRepository {
     return response;
   }
 
-  async findByIds(ids: string[]) {
+  async findByIds(ids: string[]): Promise<VehicleMissionStatus[]> {
     const entities = await this.repository.find({
       where: { vehicleMissionId: { $in: ids } },
     });
